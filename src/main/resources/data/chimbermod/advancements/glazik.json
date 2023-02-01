@@ -1,0 +1,18 @@
+{
+  "display": {
+    "icon": {
+      "item": "chimbermod:ruslan"
+    },
+    "title": "Опа ебать ты куда",
+    "description": "Кинуть глазик",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:used_ender_eye"
+    }
+  }
+}
