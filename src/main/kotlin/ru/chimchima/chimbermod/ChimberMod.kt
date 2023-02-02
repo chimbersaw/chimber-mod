@@ -4,25 +4,30 @@ import net.minecraft.entity.ai.attributes.AttributeModifier
 import net.minecraft.entity.ai.attributes.AttributeModifier.*
 import net.minecraft.entity.ai.attributes.Attributes
 import net.minecraft.entity.monster.piglin.PiglinBruteEntity
+import net.minecraft.util.ResourceLocation
 import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer
+import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.event.entity.EntityJoinWorldEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.InterModComms.*
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.Mod.*
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
 import org.apache.logging.log4j.LogManager
 import ru.chimchima.chimbermod.items.ModItems
+import ru.chimchima.chimbermod.loot.PiglinBarteringModifier
+import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import java.util.*
 
-const val MOD_ID = "chimbermod"
-private val logger = LogManager.getLogger()
 
-@Mod(MOD_ID)
-class ChimberMod {
+@Mod(ChimberMod.MOD_ID)
+@EventBusSubscriber(modid = ChimberMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+object ChimberMod {
+    const val MOD_ID = "chimber-mod"
+    private val logger = LogManager.getLogger()
+
     init {
-        val eventBus = FMLJavaModLoadingContext.get().modEventBus
-        ModItems.register(eventBus)
+        ModItems.register(MOD_BUS)
         MinecraftForge.EVENT_BUS.register(this)
     }
 
@@ -54,5 +59,14 @@ class ChimberMod {
         if (!dmg.hasModifier(halveDamage)) {
             dmg.applyPersistentModifier(halveDamage)
         }
+    }
+
+    @SubscribeEvent
+    fun on(event: RegistryEvent.Register<GlobalLootModifierSerializer<*>>) {
+        event.registry.registerAll(
+            PiglinBarteringModifier.Serializer().setRegistryName(
+                ResourceLocation(MOD_ID, "modify_piglin_bartering")
+            )
+        )
     }
 }

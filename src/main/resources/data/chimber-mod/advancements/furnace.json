@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "item": "chimber-mod:ruslan"
+    },
+    "title": "Чела плавит",
+    "description": "Поставить печь",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "block": "minecraft:furnace"
+      }
+    }
+  }
+}

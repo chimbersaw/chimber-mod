@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "chimber-mod:ruslan"
+    },
+    "title": "Высушен блейзером",
+    "description": "Убит блейзом",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:entity_killed_player",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:blaze"
+        }
+      }
+    }
+  }
+}

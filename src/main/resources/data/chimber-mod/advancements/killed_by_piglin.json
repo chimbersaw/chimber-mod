@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "item": "chimber-mod:ruslan"
+    },
+    "title": "Нерф не помог",
+    "description": "Убит нормальным пиглином или дурилой с топором",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "killed_by_piglin": {
+      "trigger": "minecraft:entity_killed_player",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:piglin"
+        }
+      }
+    },
+    "killed_by_piglin_brute": {
+      "trigger": "minecraft:entity_killed_player",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:piglin_brute"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "killed_by_piglin",
+      "killed_by_piglin_brute"
+    ]
+  ]
+}

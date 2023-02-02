@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -75,11 +76,16 @@ sourceSets.main {
 
 repositories {
     mavenCentral()
+    maven {
+        name = "Kotlin For Forge"
+        url = URI("https://thedarkcolour.github.io/KotlinForForge/")
+    }
 }
 
 dependencies {
-    minecraft("net.minecraftforge:forge:1.16.2-33.0.61")
+    minecraft("net.minecraftforge:forge:1.16.5-36.2.39")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("thedarkcolour:kotlinforforge:1.17.0")
 }
 
 tasks {
