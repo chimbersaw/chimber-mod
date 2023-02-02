@@ -14,7 +14,7 @@ group = "ru.chimchima"
 version = "1.0-SNAPSHOT"
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(11))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(8))
 }
 
 base {
@@ -113,6 +113,6 @@ tasks {
     }
 
     compileKotlin {
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
     }
 }
