@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
@@ -6,8 +7,8 @@ import java.util.*
 val modId: String by extra
 
 plugins {
-    id("net.minecraftforge.gradle") version "5.1.+"
     kotlin("jvm") version "1.8.0"
+    id("net.minecraftforge.gradle") version "5.1.+"
 }
 
 group = "ru.chimchima"
@@ -15,10 +16,6 @@ version = "1.0"
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(8))
-}
-
-base {
-    archivesName.set(modId)
 }
 
 minecraft {
@@ -88,31 +85,23 @@ dependencies {
     implementation("thedarkcolour:kotlinforforge:1.17.0")
 }
 
-tasks {
-    jar {
-        manifest {
-            val now = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(Date())
-            attributes(
-                mapOf(
-                    "Specification-Title" to "Chimber mod",
-                    "Specification-Vendor" to "chimbersaw",
-                    "Specification-Version" to "1",
-                    "Implementation-Title" to project.name,
-                    "Implementation-Version" to archiveVersion,
-                    "Implementation-Vendor" to "chimbersaw",
-                    "Implementation-Timestamp" to now
-                )
-            )
-        }
+tasks.withType<KotlinCompile> {
+    compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
+}
 
-        finalizedBy("reobfJar")
+tasks.withType<Jar> {
+//    archiveClassifier.set("standalone")
+    manifest {
+        val now = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(Date())
+        attributes(
+            "Specification-Title" to "Chimber mod",
+            "Specification-Vendor" to "chimbersaw",
+            "Specification-Version" to "1",
+            "Implementation-Title" to project.name,
+            "Implementation-Version" to archiveVersion,
+            "Implementation-Vendor" to "chimbersaw",
+            "Implementation-Timestamp" to now
+        )
     }
-
-    compileJava {
-        options.encoding = "UTF-8";
-    }
-
-    compileKotlin {
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
-    }
+    finalizedBy("reobfJar")
 }
